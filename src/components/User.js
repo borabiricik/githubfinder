@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { Button, Card } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
+import { NavLink } from "react-router-dom"
 
 export class User extends Component {
 
 
 
     render() {
-        const { avatar_url, login, html_url } = this.props.user
+        const { avatar_url, login } = this.props.user
         return (
             <span className="col-12 col-md-5 col-lg-3 px-3" >
                 <Card className=" p-0 mb-2" >
@@ -18,12 +19,10 @@ export class User extends Component {
                             </b>
                         </Card.Text>
 
-                        <Button
-                            href={html_url}
-                            variant="primary"
-                            className="btn-block">
+                        <NavLink className="btn btn-primary btn-block" to={`users/${login}`}>
                             Profile Git
-                         </Button>
+                        </NavLink>
+
                     </Card.Body>
 
 

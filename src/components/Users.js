@@ -1,59 +1,55 @@
-import React, { Component } from 'react'
+import React, {  useContext } from 'react'
 import { Loading } from './Loading'
 import User from './User'
+import GithubContext from "../context/GithubContext"
 
-class Users extends Component {
-    state = {
-        users: this.props.users
-    }
+const Users = () => {
 
+    const githubContext = useContext(GithubContext)
+    const {users,loading} = githubContext
     
-    render()
-    {
-        if(this.props.loading){
-        return <Loading />
-    }
-
-    else{
-        return (
-            <div className="row">
-                {
-                    this.props.users.map(user=>(
-                        <User user={user} key={user.id} />
-                    ))
-                }
-            </div>
-        )
-    }
-    }
 
 
-
-
-
-
-    // if(this.props.loading){
-    //     return <Loading />
-    // }
-
-    // else{
-    //     return (
-    //         <div className="row justify-content-around">
-    //             {
-
-    //                 "users"
-    //                 // this.props.users.map(user=>(
-    //                 //     <User user={user} key={user.id} />
-    //                 // ))
-    //             }
-    //         </div>
-    //     )
-    // }
-
-
-
+        if (loading) {
+            return <Loading />
+        }
+        else {
+            return (
+                <div className="row">
+                    {
+                        users.map(user => (
+                            <User user={user} key={user.id} />
+                        ))
+                    }
+                </div>
+            )
+        }
+    
 
 
 }
+
+
+
+
+
+
+// if(this.props.loading){
+//     return <Loading />
+// }
+
+// else{
+//     return (
+//         <div className="row justify-content-around">
+//             {
+
+//                 "users"
+//                 // this.props.users.map(user=>(
+//                 //     <User user={user} key={user.id} />
+//                 // ))
+//             }
+//         </div>
+//     )
+// }
 
 export default Users

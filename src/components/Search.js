@@ -1,69 +1,59 @@
-import React, { Component } from 'react'
+import React, { useContext, useState } from 'react'
 import { InputGroup, FormControl, Button } from "react-bootstrap"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
+import GithubContext from '../context/GithubContext'
 
 const alert = withReactContent(Swal)
 
-export class Search extends Component {
+const Search = () => {
 
-    
+    const githubContext = useContext(GithubContext)
 
-    state = {
-        filter: ""
+    const [keyword, setKeyword] = useState("")
+
+    const _searchFilter = (e) => {
+        setKeyword(e.target.value);
     }
 
-    _searchFilter = (e) => {
-
-
-        this.setState({
-            filter: e.target.value
-        })
-
-        
-    }
-
-    _onSearchSubmit = (e) => {
+    const _onSearchSubmit = (e) => {
         e.preventDefault();
 
-        if(this.state.filter === "")
-        {
+        if (keyword === "") {
             alert.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Arama kutucuğu boş olamaz',
-              })
+            })
         }
 
-        else{
-            this.props.searchUsers(this.state.filter);
+        else {
+            githubContext.searchUsers(keyword)
         }
     }
 
-
-    render() {
-        return (
-            <div className="mb-5">
-                <form onSubmit={this._onSearchSubmit}>
+    return (
+        <div className="mb-5">
+            <form onSubmit={_onSearchSubmit}>
 
 
-                    <InputGroup className="d-flex col-12 col-md-5 mx-auto">
-                        <FormControl
-                            placeholder="Search"
-                            onChange={this._searchFilter}
-                        />
+                <InputGroup className="d-flex col-12 col-md-5 mx-auto">
+                    <FormControl
+                        placeholder="Search"
+                        onChange={_searchFilter}
+                    />
 
-                        <Button type="submit" >
-                            Ara
+                    <Button type="submit" >
+                        Ara
                         </Button>
-                    </InputGroup>
-                </form>
+                </InputGroup>
+            </form>
 
 
 
-            </div>
-        )
-    }
+        </div>
+    )
+
 }
 
 export default Search
