@@ -1,0 +1,16 @@
+body{
+    transition: all 0.3s;
+}
+
+a{
+    color: $dark;
+    &:hover{
+        
+        color:$dark;
+        text-decoration: none;
+    }
+}
+
+.nav-link{
+    transition: all 0.3s;
+}
